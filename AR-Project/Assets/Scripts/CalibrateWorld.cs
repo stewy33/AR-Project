@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class GameScript : MonoBehaviour
+public class CalibrateWorld : MonoBehaviour
 {
   public GameObject world;
 
-  private ARTrackedImageManager m_TrackedImageManager;
-  private ARSessionOrigin m_SessionOrigin;
+  ARTrackedImageManager m_TrackedImageManager;
+  ARSessionOrigin m_SessionOrigin;
+  bool firstFrame = true;
 
   void Start()
   {
@@ -23,31 +24,17 @@ public class GameScript : MonoBehaviour
 
   void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnChanged;
 
-  bool firstFrame = true;
+  // On first frame that image marker is detected, set world position so
+  // that the marker is at the center of the world.
   void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
-    foreach (var newImage in eventArgs.added)
-    {
-
-    }
-
     foreach (var updatedImage in eventArgs.updated)
     {
       if (firstFrame)
       {
         world.transform.position = updatedImage.transform.position;
+        firstFrame = false;
       }
-      firstFrame = false;
     }
-
-    foreach (var removedImage in eventArgs.removed)
-    {
-      // Handle removed event
-    }
-  }
-
-  void Update()
-  {
-    //Debug.Log(m_SessionOrigin.transform.position);
   }
 }
