@@ -11,6 +11,18 @@ EditorUserSettings:
     RecentlyUsedScenePath-1:
       value: 22424703114646680e0b0227036c7d1c1719130b1e66333e243d04
       flags: 0
+<<<<<<< HEAD:AR-Project/UserSettings/EditorUserSettings.asset
+=======
+    RecentlyUsedScenePath-2:
+      value: 22424703114646680e0b0227036c6c191b07142f0d1a68252320092a
+      flags: 0
+    RecentlyUsedScenePath-3:
+      value: 22424703114646680e0b0227036c6d1f191a563f22213229
+      flags: 0
+    RecentlyUsedScenePath-4:
+      value: 22424703114646680e0b0227036c731103191b22293a68252320092a
+      flags: 0
+>>>>>>> networking:AR Project/UserSettings/EditorUserSettings.asset
     UnityRemoteDevice:
       value: 225f4d46245b0d4902070862342649191512
       flags: 0
