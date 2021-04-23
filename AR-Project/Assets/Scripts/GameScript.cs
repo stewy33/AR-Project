@@ -5,7 +5,8 @@ using UnityEngine.XR.ARFoundation;
 
 public class GameScript : MonoBehaviour
 {
-  [SerializeField]
+  public GameObject world;
+
   private ARTrackedImageManager m_TrackedImageManager;
   private ARSessionOrigin m_SessionOrigin;
 
@@ -22,17 +23,21 @@ public class GameScript : MonoBehaviour
 
   void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnChanged;
 
+  bool firstFrame = true;
   void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
     foreach (var newImage in eventArgs.added)
     {
-      Debug.Log(newImage.transform.position);
-      m_SessionOrigin.transform.position = newImage.transform.position;
+
     }
 
     foreach (var updatedImage in eventArgs.updated)
     {
-      // Handle updated event
+      if (firstFrame)
+      {
+        world.transform.position = updatedImage.transform.position;
+      }
+      firstFrame = false;
     }
 
     foreach (var removedImage in eventArgs.removed)
