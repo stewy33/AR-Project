@@ -58,6 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 .vsconfig
-*/.DS_Store
-*/EditorBuildSettings.asset
-*/UserSettings
+*.DS_Store
+**/UserSettings
+AR-Project/ProjectSettings/ProjectSettings.asset
+AR-Project/ProjectSettings/EditorBuildSettings.asset
