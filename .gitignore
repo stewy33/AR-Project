@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 .vsconfig
+*/.DS_Store
+*/EditorBuildSettings.asset
+*/UserSettings
