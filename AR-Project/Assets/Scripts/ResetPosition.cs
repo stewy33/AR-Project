@@ -22,4 +22,10 @@ public class ResetPosition : MonoBehaviour
             _rigidbody.transform.position = _startPosition;
         }
     }
+
+    public void resetBall()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.transform.position = _startPosition;
+    }
 }
