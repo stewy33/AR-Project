@@ -6,7 +6,7 @@ public class FootMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Vector3 _startPosition;
-    readonly int force = 5;
+    readonly int force = 10;
     // Start is called before the first frame update
     void Start()
     {
