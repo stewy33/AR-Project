@@ -5,6 +5,7 @@ using UnityEngine;
 public class FootMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
+    readonly int force = 7;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,23 @@ public class FootMovement : MonoBehaviour
         
     }
 
-    void forward()
+    public void forward()
     {
-        _rigidbody.transform.position = new Vector3(_rigidbody.transform.position.x, _rigidbody.transform.position.y, _rigidbody.transform.position.z +1);
+        _rigidbody.AddForce(new Vector3(0, 0, force), ForceMode.VelocityChange);
+    }
+
+    public void backward()
+    {
+        _rigidbody.AddForce(new Vector3(0, 0, -force), ForceMode.VelocityChange);
+    }
+
+    public void right()
+    {
+        _rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.VelocityChange);
+    }
+
+    public void left()
+    {
+        _rigidbody.AddForce(new Vector3(-force, 0, 0), ForceMode.VelocityChange);
     }
 }
