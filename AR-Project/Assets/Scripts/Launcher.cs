@@ -35,7 +35,6 @@ public class Launcher : MonoBehaviourPunCallbacks
   {
     progressLabel.SetActive(false);
     controlPanel.SetActive(true);
-    // Connect();
   }
   #endregion
 
@@ -93,7 +92,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
       // #Critical
       // Load the Room Level.
-      PhotonNetwork.LoadLevel("Room");
+      PhotonNetwork.LoadLevel("ARRoom");
     }
   }
   #endregion

@@ -37,4 +37,9 @@ public class CalibrateWorld : MonoBehaviour
       }
     }
   }
+
+  public bool IsCalibrated()
+  {
+    return firstFrame == false;
+  }
 }
