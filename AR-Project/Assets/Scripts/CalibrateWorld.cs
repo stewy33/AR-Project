@@ -10,12 +10,12 @@ public class CalibrateWorld : MonoBehaviour
 
   ARTrackedImageManager m_TrackedImageManager;
   ARSessionOrigin m_SessionOrigin;
+  GameObject foot;
 
   void Start()
   {
     m_SessionOrigin = GetComponent<ARSessionOrigin>();
   }
-  List<GameObject> feet = new List<GameObject>();
 
   void OnEnable()
   {
@@ -46,7 +46,7 @@ public class CalibrateWorld : MonoBehaviour
     {
       if (newImage.referenceImage.name == "foot marker")
       {
-        feet.Add(Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity));
+        foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
       }
     }
 
@@ -59,7 +59,6 @@ public class CalibrateWorld : MonoBehaviour
       }
       if (updatedImage.referenceImage.name == "foot marker")
       {
-        var foot = feet[feetUpdatedCounter++];
         foot.transform.position = updatedImage.transform.position;
         foot.transform.rotation = updatedImage.transform.rotation;
       }
@@ -67,8 +66,8 @@ public class CalibrateWorld : MonoBehaviour
 
     foreach (var removedImage in eventArgs.removed)
     {
-      Destroy(feet[feet.Count - 1]);
-      feet.RemoveAt(feet.Count - 1);
+      Destroy(foot);
+      foot = null;
     }
   }
 }
