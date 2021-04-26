@@ -10,14 +10,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 {
     [Tooltip("AR Camera game object")]
     public GameObject arcamera;
-    [Tooltip("World game object")]
-    public GameObject world;
-    public GameObject arSessionOrigin;
+    // [Tooltip("World game object")]
+    // public GameObject world;
+    // public GameObject arSessionOrigin;
 
-    private bool freshInstance;
-    private Vector3 offset;
+    // private bool freshInstance;
     // private WorldController worldscript;
-    private CalibrateWorld arSessionOriginScript;
+    // private CalibrateWorld arSessionOriginScript;
 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
@@ -25,12 +24,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        offset = new Vector3(0, 0, 0);
-        freshInstance = true;
-        if (photonView.IsMine)
-        {
-            arSessionOriginScript = arSessionOrigin.GetComponent<CalibrateWorld>();
-        }
+        // freshInstance = true;
+        // if (photonView.IsMine)
+        // {
+        //     arSessionOriginScript = arSessionOrigin.GetComponent<CalibrateWorld>();
+        // }
     }
 
     // Track player to its AR camera
@@ -38,18 +36,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            Debug.LogFormat("AR Camera Position {0}", arcamera.transform.position);
-            Debug.LogFormat("World Position {0}", world.transform.position);
-            if (freshInstance && arSessionOriginScript.IsCalibrated())
-            {
-                offset = world.transform.position - arcamera.transform.position;
-                Debug.LogFormat("Transform has changed, offset: {0}", offset);
-                freshInstance = false;
-            }
-            if (!offset.Equals(Vector3.zero))
-            {
-                transform.position = arcamera.transform.position + offset;
-            }   
+            // Debug.LogFormat("AR Camera Position {0}", arcamera.transform.position);
+            // Debug.LogFormat("World Position {0}", world.transform.position);
+            // if (freshInstance && arSessionOriginScript.IsCalibrated())
+            // {
+            //     Debug.LogFormat("Transform has changed, offset: {0}", offset);
+            //     freshInstance = false;
+            // }
+            transform.position = arcamera.transform.position;
         }
     }
 

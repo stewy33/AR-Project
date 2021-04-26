@@ -28,18 +28,14 @@ public class CalibrateWorld : MonoBehaviour
   // that the marker is at the center of the world.
   void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
-    foreach (var updatedImage in eventArgs.updated)
+    foreach (var trackedImage in eventArgs.updated)
     {
       if (firstFrame)
       {
-        world.transform.position = updatedImage.transform.position;
+        // world.transform.position = updatedImage.transform.position;
+        m_SessionOrigin.MakeContentAppearAt(world.transform, trackedImage.transform.position, trackedImage.transform.localRotation);
         firstFrame = false;
       }
     }
-  }
-
-  public bool IsCalibrated()
-  {
-    return firstFrame == false;
   }
 }

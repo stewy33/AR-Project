@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("The prefab to use for representing the player")]
     public GameObject playerPrefab;
     public GameObject world;
-    public GameObject arSessionOrigin;
     public GameObject arcamera;
+    // public GameObject arSessionOrigin;
     #region Photon Callbacks
 
 
@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviourPunCallbacks
                 var newPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,5f,0f), Quaternion.identity, 0);
                 newPlayer.transform.parent = world.transform;
                 var pc = newPlayer.GetComponent<PlayerController>();
-                // var wc = world.GetComponent<WorldController>();
                 pc.arcamera = arcamera;
-                pc.world = world;
-                pc.arSessionOrigin = arSessionOrigin;
+                // var wc = world.GetComponent<WorldController>();
+                // pc.world = world;
+                // pc.arSessionOrigin = arSessionOrigin;
                 // wc.SetCalibrated();
             }
             else
