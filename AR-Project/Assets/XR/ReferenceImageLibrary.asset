@@ -19,9 +19,29 @@ MonoBehaviour:
       m_GuidLow: 4967829664555742339
       m_GuidHigh: 15443663020864750486
     m_SerializedTextureGuid:
-      m_GuidLow: 3766952433576942027
-      m_GuidHigh: 14430626699027697435
-    m_Size: {x: 0.1, y: 0.17192982}
+      m_GuidLow: 6054793127172652666
+      m_GuidHigh: 3355048319298857515
+    m_Size: {x: 0.07, y: 0.12}
     m_SpecifySize: 1
-    m_Name: marker
+    m_Name: foot marker
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5452006203855328515
+      m_GuidHigh: 13692005370727468192
+    m_SerializedTextureGuid:
+      m_GuidLow: 8403384712130688968
+      m_GuidHigh: 13332763291937805067
+    m_Size: {x: 0.07, y: 0.120238096}
+    m_SpecifySize: 1
+    m_Name: calibration marker
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5301984475661807770
+      m_GuidHigh: 12976852108351433882
+    m_SerializedTextureGuid:
+      m_GuidLow: 7254898540527226873
+      m_GuidHigh: 4737686706891563320
+    m_Size: {x: 0.07, y: 0.1199711}
+    m_SpecifySize: 1
+    m_Name: fissure marker b&w
     m_Texture: {fileID: 0}
