@@ -29,6 +29,7 @@ public class Launcher : MonoBehaviourPunCallbacks
   void Awake()
   {
     PhotonNetwork.AutomaticallySyncScene = true;
+    Screen.orientation = ScreenOrientation.Portrait;
   }
 
   void Start()

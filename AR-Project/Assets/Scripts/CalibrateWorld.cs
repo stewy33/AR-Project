@@ -10,11 +10,13 @@ public class CalibrateWorld : MonoBehaviour
 
   ARTrackedImageManager m_TrackedImageManager;
   ARSessionOrigin m_SessionOrigin;
-  GameObject foot;
+  private GameObject foot;
+  // private bool debugAdded;
 
   void Start()
   {
     m_SessionOrigin = GetComponent<ARSessionOrigin>();
+    // debugAdded = false;
   }
 
   void OnEnable()
@@ -42,13 +44,15 @@ public class CalibrateWorld : MonoBehaviour
 
   void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
-    foreach (var newImage in eventArgs.added)
-    {
-      if (newImage.referenceImage.name == "foot marker")
-      {
-        foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-      }
-    }
+    // foreach (var newImage in eventArgs.added)
+    // {
+    //   if (newImage.referenceImage.name == "foot marker")
+    //   {
+    //     foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+    //     Debug.LogFormat("Added foot prefab");
+    //     debugAdded = true;
+    //   }
+    // }
 
     int feetUpdatedCounter = 0;
     foreach (var updatedImage in eventArgs.updated)
@@ -59,15 +63,28 @@ public class CalibrateWorld : MonoBehaviour
       }
       if (updatedImage.referenceImage.name == "foot marker")
       {
+        if (foot == null)
+        {
+          foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+          DontDestroyOnLoad(foot);
+          Debug.LogFormat("Added foot prefab");
+          // debugAdded = true;
+        }
+        feetUpdatedCounter++;
         foot.transform.position = updatedImage.transform.position;
         foot.transform.rotation = updatedImage.transform.rotation;
       }
     }
+    Debug.LogFormat("Updated {0} feet", feetUpdatedCounter);
 
     foreach (var removedImage in eventArgs.removed)
     {
-      Destroy(foot);
-      foot = null;
+      Debug.LogFormat("Removing foot image");
+      if (removedImage.referenceImage.name == "foot marker")
+      {
+        Destroy(foot);
+        foot = null;
+      }
     }
   }
 }
