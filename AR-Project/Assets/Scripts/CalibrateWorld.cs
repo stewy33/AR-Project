@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+using Photon.Pun;
+using Photon.Realtime;
+
 public class CalibrateWorld : MonoBehaviour
 {
   public GameObject world;
@@ -27,21 +30,6 @@ public class CalibrateWorld : MonoBehaviour
 
   void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
 
-  // On first frame that image marker is detected, set world position so
-  // that the marker is at the center of the world.
-  // void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
-  // {
-  //   foreach (var trackedImage in eventArgs.updated)
-  //   {
-  //     if (firstFrame)
-  //     {
-  //       // world.transform.position = updatedImage.transform.position;
-  //       m_SessionOrigin.MakeContentAppearAt(world.transform, trackedImage.transform.position, trackedImage.transform.localRotation);
-  //       firstFrame = false;
-  //     }
-  //   }
-  // }
-
   void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
     // foreach (var newImage in eventArgs.added)
@@ -65,8 +53,7 @@ public class CalibrateWorld : MonoBehaviour
       {
         if (foot == null)
         {
-          foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-          DontDestroyOnLoad(foot);
+          foot = PhotonNetwork.Instantiate(footPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
           Debug.LogFormat("Added foot prefab");
           // debugAdded = true;
         }

@@ -47,11 +47,11 @@ public class FootController : MonoBehaviourPunCallbacks
 
   void Awake()
   {
-    /*if (photonView.IsMine)
-    {
-        PlayerController.LocalPlayerInstance = this.gameObject;
-    }
+    Debug.LogFormat("FootController awake called");
+    // if (photonView.IsMine)
+    // {
+    //   FootController.LocalPlayerInstance = this.gameObject;
+    // }
     DontDestroyOnLoad(this.gameObject);
-    Debug.LogFormat("Assigning gameobject to local player");*/
   }
 }
