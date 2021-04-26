@@ -9,7 +9,7 @@ public class CalibrateWorld : MonoBehaviour
 
   ARTrackedImageManager m_TrackedImageManager;
   ARSessionOrigin m_SessionOrigin;
-  bool firstFrame = true;
+  // bool firstFrame = true;
 
   void Start()
   {
@@ -19,23 +19,32 @@ public class CalibrateWorld : MonoBehaviour
   void OnEnable()
   {
     m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
-    m_TrackedImageManager.trackedImagesChanged += OnChanged;
+    m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
   }
 
-  void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnChanged;
+  void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
 
   // On first frame that image marker is detected, set world position so
   // that the marker is at the center of the world.
-  void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
+  // void OnChanged(ARTrackedImagesChangedEventArgs eventArgs)
+  // {
+  //   foreach (var trackedImage in eventArgs.updated)
+  //   {
+  //     if (firstFrame)
+  //     {
+  //       // world.transform.position = updatedImage.transform.position;
+  //       m_SessionOrigin.MakeContentAppearAt(world.transform, trackedImage.transform.position, trackedImage.transform.localRotation);
+  //       firstFrame = false;
+  //     }
+  //   }
+  // }
+
+  void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
-    foreach (var trackedImage in eventArgs.updated)
+    if (eventArgs.updated.Count > 0)
     {
-      if (firstFrame)
-      {
-        // world.transform.position = updatedImage.transform.position;
-        m_SessionOrigin.MakeContentAppearAt(world.transform, trackedImage.transform.position, trackedImage.transform.localRotation);
-        firstFrame = false;
-      }
+      ARTrackedImage trackedImage = eventArgs.updated[0];
+      m_SessionOrigin.MakeContentAppearAt(world.transform, trackedImage.transform.position, trackedImage.transform.localRotation);
     }
   }
 }
