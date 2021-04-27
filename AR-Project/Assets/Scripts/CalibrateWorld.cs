@@ -49,7 +49,7 @@ public class CalibrateWorld : MonoBehaviour
       {
         m_SessionOrigin.MakeContentAppearAt(world.transform, updatedImage.transform.position, updatedImage.transform.localRotation);
       }
-      if (updatedImage.referenceImage.name == "foot marker")
+      else if (updatedImage.referenceImage.name == "foot marker")
       {
         if (foot == null)
         {
@@ -62,7 +62,7 @@ public class CalibrateWorld : MonoBehaviour
         foot.transform.rotation = updatedImage.transform.rotation;
       }
     }
-    Debug.LogFormat("Updated {0} feet", feetUpdatedCounter);
+    // Debug.LogFormat("Updated {0} feet", feetUpdatedCounter);
 
     foreach (var removedImage in eventArgs.removed)
     {
