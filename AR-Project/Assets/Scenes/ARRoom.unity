@@ -359,7 +359,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209722822}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3d6c7e6e37abb4de3bd3dd8247bf8444, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -454,7 +454,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386967355}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3d6c7e6e37abb4de3bd3dd8247bf8444, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1097,8 +1097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HumanSegmentationStencilMode: 1
-  m_HumanSegmentationDepthMode: 1
+  m_HumanSegmentationStencilMode: 3
+  m_HumanSegmentationDepthMode: 2
 --- !u!1 &1470766046
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1139,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470766046}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3d6c7e6e37abb4de3bd3dd8247bf8444, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1327,6 +1327,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 135134225773752490, guid: ec3e8f3ed27e2244caaedaf589590a03,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3d6c7e6e37abb4de3bd3dd8247bf8444,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3e8f3ed27e2244caaedaf589590a03, type: 3}
 --- !u!4 &1855657155 stripped
@@ -1628,7 +1634,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146063148}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3d6c7e6e37abb4de3bd3dd8247bf8444, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
