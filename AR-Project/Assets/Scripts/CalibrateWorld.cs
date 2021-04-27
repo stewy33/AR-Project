@@ -13,13 +13,12 @@ public class CalibrateWorld : MonoBehaviour
 
   ARTrackedImageManager m_TrackedImageManager;
   ARSessionOrigin m_SessionOrigin;
-  private GameObject foot;
-  // private bool debugAdded;
+  private GameObject leftFoot;
+  private GameObject rightFoot;
 
   void Start()
   {
     m_SessionOrigin = GetComponent<ARSessionOrigin>();
-    // debugAdded = false;
   }
 
   void OnEnable()
@@ -42,35 +41,48 @@ public class CalibrateWorld : MonoBehaviour
     //   }
     // }
 
-    int feetUpdatedCounter = 0;
     foreach (var updatedImage in eventArgs.updated)
     {
+      Debug.LogFormat("Updated Image: {0}", updatedImage.referenceImage.name);
       if (updatedImage.referenceImage.name == "calibration marker")
       {
         m_SessionOrigin.MakeContentAppearAt(world.transform, updatedImage.transform.position, updatedImage.transform.localRotation);
       }
-      else if (updatedImage.referenceImage.name == "foot marker")
+      if (updatedImage.referenceImage.name == "left foot marker")
       {
-        if (foot == null)
+        if (leftFoot == null)
         {
-          foot = PhotonNetwork.Instantiate(footPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
-          Debug.LogFormat("Added foot prefab");
-          // debugAdded = true;
+          leftFoot = PhotonNetwork.Instantiate(footPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+          Debug.LogFormat("Added foot prefab for left foot");
         }
-        feetUpdatedCounter++;
-        foot.transform.position = updatedImage.transform.position;
-        foot.transform.rotation = updatedImage.transform.rotation;
+        leftFoot.transform.position = updatedImage.transform.position;
+        leftFoot.transform.rotation = updatedImage.transform.rotation;
+      }
+      if (updatedImage.referenceImage.name == "right foot marker")
+      {
+        if (rightFoot == null)
+        {
+          rightFoot = PhotonNetwork.Instantiate(footPrefab.name, new Vector3(0, 0, 0), Quaternion.identity);
+          Debug.LogFormat("Added foot prefab for right foot");
+        }
+        rightFoot.transform.position = updatedImage.transform.position;
+        rightFoot.transform.rotation = updatedImage.transform.rotation;
       }
     }
-    // Debug.LogFormat("Updated {0} feet", feetUpdatedCounter);
 
     foreach (var removedImage in eventArgs.removed)
     {
-      Debug.LogFormat("Removing foot image");
-      if (removedImage.referenceImage.name == "foot marker")
+      if (removedImage.referenceImage.name == "left foot marker")
       {
-        Destroy(foot);
-        foot = null;
+        Debug.LogFormat("Removing left foot image");
+        Destroy(leftFoot);
+        leftFoot = null;
+      }
+      if (removedImage.referenceImage.name == "right foot marker")
+      {
+        Debug.LogFormat("Removing right foot image");
+        Destroy(rightFoot);
+        rightFoot = null;
       }
     }
   }

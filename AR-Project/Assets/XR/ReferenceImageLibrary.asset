@@ -23,7 +23,7 @@ MonoBehaviour:
       m_GuidHigh: 3355048319298857515
     m_Size: {x: 0.07, y: 0.12}
     m_SpecifySize: 1
-    m_Name: foot marker
+    m_Name: left foot marker
     m_Texture: {fileID: 0}
   - m_SerializedGuid:
       m_GuidLow: 5452006203855328515
@@ -43,5 +43,5 @@ MonoBehaviour:
       m_GuidHigh: 4737686706891563320
     m_Size: {x: 0.07, y: 0.1199711}
     m_SpecifySize: 1
-    m_Name: fissure marker b&w
+    m_Name: right foot marker
     m_Texture: {fileID: 0}
