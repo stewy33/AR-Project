@@ -62,7 +62,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     Debug.Log("OnConnectedToMaster was called by PUN tutorial");
     if (isConnecting)
     {
-      // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
+      // Attempt to join random room
       PhotonNetwork.JoinRandomRoom();
       isConnecting = false;
     }
@@ -78,6 +78,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
   public override void OnJoinRandomFailed(short returnCode, string message)
   {
+    // May not be a current room available, create a new room
     Debug.Log("OnJoinRandomFailed was called by PUN");
     PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
   }
@@ -85,14 +86,13 @@ public class Launcher : MonoBehaviourPunCallbacks
   public override void OnJoinedRoom()
   {
     Debug.Log("OnJoinedRoom was called by PUN tutorial");
-    // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
+    // Load room if first player
     if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
     {
       Debug.Log("We load the 'Room' ");
 
 
-      // #Critical
-      // Load the Room Level.
+      // Load the Room Level
       PhotonNetwork.LoadLevel("ARRoom");
     }
   }

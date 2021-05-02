@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-
 using Photon.Pun;
-using Photon.Realtime;
 
 public class CalibrateWorld : MonoBehaviour
 {
@@ -29,25 +27,17 @@ public class CalibrateWorld : MonoBehaviour
 
   void OnDisable() => m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
 
+  // Each time a marker is detected, perform some actions
   void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
   {
-    // foreach (var newImage in eventArgs.added)
-    // {
-    //   if (newImage.referenceImage.name == "foot marker")
-    //   {
-    //     foot = Instantiate(footPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-    //     Debug.LogFormat("Added foot prefab");
-    //     debugAdded = true;
-    //   }
-    // }
-
     foreach (var updatedImage in eventArgs.updated)
     {
-      Debug.LogFormat("Updated Image: {0}", updatedImage.referenceImage.name);
+      // Translate AR session origin to world gameobject absolute position + rotation
       if (updatedImage.referenceImage.name == "calibration marker")
       {
         m_SessionOrigin.MakeContentAppearAt(world.transform, updatedImage.transform.position, updatedImage.transform.localRotation);
       }
+      // Detect left root and right foot marker, setting respective prefabs' position and rotation
       if (updatedImage.referenceImage.name == "left foot marker")
       {
         if (leftFoot == null)
@@ -70,6 +60,7 @@ public class CalibrateWorld : MonoBehaviour
       }
     }
 
+    // Remove foot if images are removed
     foreach (var removedImage in eventArgs.removed)
     {
       if (removedImage.referenceImage.name == "left foot marker")

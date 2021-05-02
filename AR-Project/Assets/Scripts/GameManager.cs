@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -13,32 +12,24 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
     public GameObject world;
     public GameObject arcamera;
-    // public GameObject arSessionOrigin;
+
     #region Photon Callbacks
-
-
     void Start()
     {
-        // m_SessionOrigin = GetComponent<ARSessionOrigin>();
         if (playerPrefab == null)
         {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference.", this);
+            Debug.LogError("player prefab is not set", this);
         }
         else
         {
             Debug.LogFormat("We are Instantiating LocalPlayer");
-            // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+            // spawn character for local player - gets synced by using PhotonNetwork.Instantiate
             if (PlayerController.LocalPlayerInstance == null)
             {
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 var newPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f,5f,0f), Quaternion.identity, 0);
                 newPlayer.transform.parent = world.transform;
                 var pc = newPlayer.GetComponent<PlayerController>();
                 pc.arcamera = arcamera;
-                // var wc = world.GetComponent<WorldController>();
-                // pc.world = world;
-                // pc.arSessionOrigin = arSessionOrigin;
-                // wc.SetCalibrated();
             }
             else
             {
@@ -47,18 +38,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // Called when the local player left the room. We need to load the launcher scene.
+    // Called when the local player left the room - load launcher scene
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
     }
 
-
     #endregion
 
     #region Private Methods
 
-
+    // Load ARRoom level
     void LoadArena()
     {
         if (!PhotonNetwork.IsMasterClient)
@@ -87,10 +77,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
 
-
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
 
 
             LoadArena();
@@ -101,10 +90,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
-
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+            Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
 
 
             LoadArena();

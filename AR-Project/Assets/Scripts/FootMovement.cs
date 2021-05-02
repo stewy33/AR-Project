@@ -14,12 +14,6 @@ public class FootMovement : MonoBehaviour
         _startPosition = _rigidbody.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ResetFoot()
     {
         _rigidbody.velocity = Vector3.zero;

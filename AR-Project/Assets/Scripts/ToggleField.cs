@@ -1,9 +1,7 @@
 using System.Collections;
-// using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
-using Photon.Realtime;
 
 [RequireComponent(typeof(Toggle))]
 public class ToggleField : MonoBehaviour
